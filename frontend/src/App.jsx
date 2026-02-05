@@ -1,21 +1,17 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import {ProductList,ProductDetail} from "./pages"
+import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
 
+import React from 'react'
 
-
-function App() {
-  const [message, setMessage] = useState(0)
-  useEffect(()=>{
-    fetch("http://127.0.0.1:8000/api/")
-    .then(response=>response.json())
-    .then(data=>setMessage(data.message))
-    .then(err=>console.log("fetching error" , err))
-  },[]);
-
+const App = () => {
   return (
-    <>
-    <h1>Welcome to store</h1>
-    <p> {message || 'loading..' }</p>
-    </>
+    <Router>
+      <Routes>
+        <Route path='/' element={<ProductList/>}/>
+        <Route path='/product/:id' element={<ProductDetail/>}/>
+      </Routes>
+    </Router>
   )
 }
 
