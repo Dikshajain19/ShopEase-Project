@@ -16,7 +16,7 @@ const ProductCard = ({product}) => {
 
             {/* Content */}
             <div className="p-5">
-
+                
             {/* Category */}
             <span className="inline-block mb-2 rounded-full bg-pink-100 px-3 py-1 text-xs font-semibold text-pink-600">
                 {product.category?.name}

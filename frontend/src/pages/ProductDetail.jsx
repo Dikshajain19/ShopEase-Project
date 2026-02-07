@@ -56,6 +56,11 @@ const ProductDetail = () => {
               
               <div className="flex flex-col justify-center">
                 {/* Category */}
+                <span className="text-2xl text-pink-600 underline mb-2">
+                    <a href="/"> Back to Home</a>
+                  </span>
+                
+ 
                 <span className="mb-3 inline-block w-fit rounded-full bg-pink-100 px-4 py-1 text-sm font-semibold text-pink-600">
                   {product.category?.name}
                 </span>
@@ -93,9 +98,7 @@ const ProductDetail = () => {
                   <button className="rounded-2xl border-2 border-pink-300 px-6 py-3 font-semibold text-pink-600 transition hover:bg-pink-50">
                     Add to Cart
                   </button>
-                  <div className="rounded-2xl bg-linear-to-r from-pink-400 to-fuchsia-500 px-6 py-3 text-white font-semibold shadow-md transition hover:scale-105">
-                    <a href="/"> Home</a>
-                  </div>
+                  
                 </div>
               </div>
             </div>

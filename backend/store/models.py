@@ -67,3 +67,15 @@ class Cart(models.Model):
     @property
     def total(self):
         return sum(item.subtotal for item in self.items.all())
+    
+class CartItem(models.Model):
+    cart=models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='items')
+    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity=models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.quantity}*{self.product.name}"
+    
+    @property
+    def subtotal(self):
+        return self.quantity*self.product.price
