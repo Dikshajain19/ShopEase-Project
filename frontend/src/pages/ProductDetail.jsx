@@ -2,13 +2,14 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useCart } from "../context/CardContext";
 const ProductDetail = () => {
   const { id } = useParams();
   const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const {addToCart}=useCart()
 
   useEffect(() => {
     fetch(`${BASEURL}/api/products/${id}/`)
@@ -95,7 +96,7 @@ const ProductDetail = () => {
                     Buy Now
                   </button>
 
-                  <button className="rounded-2xl border-2 border-pink-300 px-6 py-3 font-semibold text-pink-600 transition hover:bg-pink-50">
+                  <button onClick={()=>addToCart(product)} className="rounded-2xl border-2 border-pink-300 px-6 py-3 font-semibold text-pink-600 transition hover:bg-pink-50">
                     Add to Cart
                   </button>
                   
