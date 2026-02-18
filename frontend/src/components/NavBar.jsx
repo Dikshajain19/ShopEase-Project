@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useCart } from '../context/CardContext'
+import { useCart } from '../context/CartContext'
 
 const NavBar = () => {
-  const cartItems=useCart();
-  const cartCount=cartItems.reduce((total,item)=>total+item.quantity)
+  const {cartItems}=useCart();
+  const cartCount=cartItems.reduce((total,item)=>total+item.quantity,0)
   return (
       <nav className="sticky top-0 z-50 bg-linear-to-r from-pink-400 via-rose-400 to-fuchsia-500 shadow-lg">
       <div className="mx-auto max-w-7xl px-6">
@@ -15,7 +15,7 @@ const NavBar = () => {
             to="/"
             className="text-2xl font-bold tracking-wide text-white"
           >
-            Pink<span className="text-pink-100">Store</span>
+            Pink<span className="text-pink-100">ShopEase</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -38,7 +38,7 @@ const NavBar = () => {
             >
               Cart
               {cartCount>0 && (
-                <span>{cartCount}</span>
+                <span className='bg-amber-400 text-black p-1'>{cartCount}</span>
               )}
             </Link>
             <Link

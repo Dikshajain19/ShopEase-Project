@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CardContext";
+import { useCart } from "../context/CartContext";
 const ProductDetail = () => {
   const { id } = useParams();
   const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
@@ -96,7 +96,9 @@ const ProductDetail = () => {
                     Buy Now
                   </button>
 
-                  <button onClick={()=>addToCart(product)} className="rounded-2xl border-2 border-pink-300 px-6 py-3 font-semibold text-pink-600 transition hover:bg-pink-50">
+                  <button onClick={()=>{
+                    console.log("button clicked")
+                    addToCart(product.id)}} className="rounded-2xl border-2 border-pink-300 px-6 py-3 font-semibold text-pink-600 transition hover:bg-pink-50">
                     Add to Cart
                   </button>
                   
