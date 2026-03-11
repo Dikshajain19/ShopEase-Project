@@ -5,6 +5,7 @@ import NavBar from "./components/NavBar"
 import CartPage  from './pages/CartPage'
 
 import React from 'react'
+import CheckoutPage from './pages/CheckoutPage'
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path='/products' element={<ProductList/>}/>
         <Route path='/product/:id' element={<ProductDetail/>}/>
         <Route path='/cart' element={<CartPage/>}/>
+        <Route path='/checkout' element={<CheckoutPage/>}/>
       </Routes>
     </Router>
   )

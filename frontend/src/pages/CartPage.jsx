@@ -1,5 +1,6 @@
 import { useCart } from "../context/CartContext";
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function CartPage() {
   const { cartItems,total, removeFromCart, updateItems } = useCart();
@@ -95,9 +96,9 @@ export default function CartPage() {
 
             {/* Checkout Button */}
             <div className="mt-6 text-center">
-              <button className="bg-linear-to-r from-pink-400 to-fuchsia-500 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition">
+              <Link to='/checkout' className="bg-linear-to-r from-pink-400 to-fuchsia-500 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:scale-105 transition">
                 Proceed to Checkout ✨
-              </button>
+              </Link>
             </div>
           </>
         )}
