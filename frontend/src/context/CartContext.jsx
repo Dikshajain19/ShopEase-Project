@@ -7,7 +7,7 @@ export const CartProvider=({children})=>{
     const [total,setTotal]=useState(0)
     const fetchCart=async()=>{
         try{
-            const res= await authFetch(`${BASEURL}/api/cart/`)
+            const res= await authFetch(`${BASEURL}api/cart/`)
             if(!res.ok){
                 throw new Error("Failed to fetch cart")
             }
@@ -45,7 +45,7 @@ export const CartProvider=({children})=>{
     //actual logic which will work for backend
     const addToCart=async(productid)=>{
         try{
-            await authFetch(`${BASEURL}/api/cart/add/`,{
+            await authFetch(`${BASEURL}api/cart/add/`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -71,7 +71,7 @@ export const CartProvider=({children})=>{
         try{
 
         
-            await authFetch(`${BASEURL}/api/cart/remove/`,{
+            await authFetch(`${BASEURL}api/cart/remove/`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -105,7 +105,7 @@ export const CartProvider=({children})=>{
             return;
         }
         try{
-            await authFetch(`${BASEURL}/api/cart/update/`,{
+            await authFetch(`${BASEURL}api/cart/update/`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -125,7 +125,7 @@ export const CartProvider=({children})=>{
         
     }
     return(
-        <CartContext.Provider value={{cartItems,total,addToCart,removeFromCart,updateItems}}>{children}</CartContext.Provider>
+        <CartContext.Provider value={{cartItems,total,addToCart,removeFromCart,updateItems,clearCart}}>{children}</CartContext.Provider>
     )
 
 }

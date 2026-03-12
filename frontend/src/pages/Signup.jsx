@@ -20,7 +20,7 @@ function Signup() {
     setMsg("");
 
     try {
-      const res = await fetch(`${BASE}/api/register/`, {
+      const res = await fetch(`${BASE}api/register/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

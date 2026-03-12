@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+
 const ProductDetail = () => {
   const { id } = useParams();
   const BASEURL = import.meta.env.VITE_DJANGO_BASE_URL;
@@ -10,9 +11,17 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const {addToCart}=useCart()
+  const handleAddToCart=()=>{
+    if(!localStorage.getItem("access_token")){
+      window.location.href='/login'
+      return;
+    }
+    addToCart(product.id);
+    alert("Product added to cart");
+  }
 
   useEffect(() => {
-    fetch(`${BASEURL}/api/products/${id}/`)
+    fetch(`${BASEURL}api/products/${id}/`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch product details");
@@ -92,13 +101,11 @@ const ProductDetail = () => {
 
                 {/* Actions */}
                 <div className="flex gap-4">
-                  <button className="rounded-2xl bg-linear-to-r from-pink-400 to-fuchsia-500 px-6 py-3 text-white font-semibold shadow-md transition hover:scale-105">
+                  <Link to='/checkout' className="rounded-2xl bg-linear-to-r from-pink-400 to-fuchsia-500 px-6 py-3 text-white font-semibold shadow-md transition hover:scale-105">
                     Buy Now
-                  </button>
+                  </Link>
 
-                  <button onClick={()=>{
-                    console.log("button clicked")
-                    addToCart(product.id)}} className="rounded-2xl border-2 border-pink-300 px-6 py-3 font-semibold text-pink-600 transition hover:bg-pink-50">
+                  <button onClick={handleAddToCart} className="rounded-2xl border-2 border-pink-300 px-6 py-3 font-semibold text-pink-600 transition hover:bg-pink-50">
                     Add to Cart
                   </button>
                   

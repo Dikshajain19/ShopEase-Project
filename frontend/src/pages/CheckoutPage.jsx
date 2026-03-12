@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { authFetch } from "../util/auth";
 
 const CheckoutPage = () => {
   const BASEURL=import.meta.env.VITE_DJANGO_BASE_URL
@@ -30,7 +31,7 @@ const CheckoutPage = () => {
     setMessage("");
 
     try {
-      const res = await fetch(`${BASEURL}api/orders/create/`, {
+      const res = await authFetch(`${BASEURL}api/orders/create/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,10 +39,14 @@ const CheckoutPage = () => {
         body: JSON.stringify(form),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      console.log("RAW RESPONSE:", text);
+
+      const data = text ? JSON.parse(text) : {};
 
       if (res.ok) {
         setMessage("🎉 Order Placed Successfully!");
+        alert("🎉 Order Placed Successfully!")
         clearCart();
 
         setTimeout(() => {
@@ -58,7 +63,7 @@ const CheckoutPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-200 via-rose-100 to-fuchsia-200 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-pink-200 via-rose-100 to-fuchsia-200 p-6">
       
       <div className="w-full max-w-lg bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl p-8">
         

@@ -3,6 +3,9 @@ import {ProductList,ProductDetail} from "./pages"
 import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
 import NavBar from "./components/NavBar"
 import CartPage  from './pages/CartPage'
+import PrivateRouter from "./components/PrivateRouter"
+import Signup from './pages/Signup'
+import Login from './pages/Login'
 
 import React from 'react'
 import CheckoutPage from './pages/CheckoutPage'
@@ -15,7 +18,13 @@ const App = () => {
         <Route path='/products' element={<ProductList/>}/>
         <Route path='/product/:id' element={<ProductDetail/>}/>
         <Route path='/cart' element={<CartPage/>}/>
-        <Route path='/checkout' element={<CheckoutPage/>}/>
+        <Route element={<PrivateRouter/>}>
+          <Route path='/checkout' element={<CheckoutPage/>}/>
+        </Route>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/signup' element={<Signup/>}/>
+
+        
       </Routes>
     </Router>
   )

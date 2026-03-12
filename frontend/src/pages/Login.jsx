@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveTokens } from "../utils/auth";
+import { saveTokens } from "../util/auth";
 
 function Login() {
   const BASE = import.meta.env.VITE_DJANGO_BASE_URL;
@@ -16,7 +16,7 @@ function Login() {
     setMsg("");
 
     try {
-      const res = await fetch(`${BASE}/api/token/`, {
+      const res = await fetch(`${BASE}api/token/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),

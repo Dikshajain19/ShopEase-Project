@@ -1,4 +1,4 @@
-export const saveToken = (token) => {
+export const saveTokens = (token) => {
     localStorage.setItem("access_token", token.access);
     localStorage.setItem("refresh_token", token.refresh);
 };

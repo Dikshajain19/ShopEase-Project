@@ -1,9 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import { clearToken,getAccessToken } from '../util/auth'
+
+
 
 const NavBar = () => {
   const {cartItems}=useCart();
+  const navigate=useNavigate();
+  const isLoggedIn = !!getAccessToken()
+  const handleLogout=()=>{
+    clearToken();
+    navigate('/login');
+  }
   const cartCount=cartItems.reduce((total,item)=>total+item.quantity,0)
   return (
       <nav className="sticky top-0 z-50 bg-linear-to-r from-pink-400 via-rose-400 to-fuchsia-500 shadow-lg">
@@ -41,12 +50,24 @@ const NavBar = () => {
                 <span className='bg-amber-400 text-black p-1'>{cartCount}</span>
               )}
             </Link>
-            <Link
-              to="/login"
-              className="rounded-xl bg-white/90 px-4 py-2 text-sm font-semibold text-pink-600 shadow-md hover:scale-105 transition"
-            >
-              Login
-            </Link>
+
+             {!isLoggedIn ? (
+                    <>
+                        <Link to='/login' className="rounded-xl bg-white/90 px-4 py-2 text-sm font-semibold text-pink-600 shadow-md hover:scale-105 transition">
+                            Login
+                        </Link>
+                        <Link to='/signup' className="rounded-xl bg-white/90 px-4 py-2 text-sm font-semibold text-pink-600 shadow-md hover:scale-105 transition">
+                            Sign Up
+                        </Link>
+                    </>
+                ) : (
+                    <button onClick={handleLogout} className="rounded-xl bg-white/90 px-4 py-2 text-sm font-semibold text-pink-600 shadow-md hover:scale-105 transition">
+                        Logout
+                    </button>
+            )}
+              
+            
+            
           </div>
 
           {/* Mobile Menu Button */}
